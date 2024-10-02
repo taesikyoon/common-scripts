@@ -3,6 +3,7 @@
 # 데이터 이전을 위한 전체 실행 스크립트                        #
 # setup_ssh_config.sh, transfer_pem_key.sh 스크립트 사용 #
 #######################################################
+set -e
 
 # 색상 코드 정의
 RED='\033[0;31m'
@@ -50,12 +51,12 @@ else
     fi
 fi
 
-echo -e "${GREEN}Is there a volume attached to your container that handles data persistence? (yes/no): ${NC}"
-read volume_check
+echo -e "${GREEN}Do you need to copy data from inside the Docker container to the host? (yes/no): ${NC}"
+read copy_data
 
-volume_check=$(normalize_input "$volume_check")
+copy_data=$(normalize_input "$copy_data")
 
-if [[ $volume_check == "yes" ]]; then
+if [[ $copy_data == "no" ]]; then
     echo -e "${GREEN}No need to move data from inside the container. Proceed with the next steps.${NC}"
 else
     echo -e "${GREEN}Current running containers:${NC}"
