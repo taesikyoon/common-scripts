@@ -42,7 +42,7 @@ fi
 
 # 공개 키 파일 출력
 echo -e "${BLUE}Please copy the following content and paste it into the target instance's ~/.ssh/authorized_keys file:${NC}"
-cat ~/.ssh/${key_filename}
+cat ~/.ssh/${key_filename}.pub
 
 echo -e "${BLUE}After copying the key to the target instance, press Enter to continue...${NC}"
 read -p ""
