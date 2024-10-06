@@ -23,7 +23,6 @@ normalize_input() {
     esac
 }
 
-
 # config 파일이 있는지 확인
 if [ ! -f ~/.ssh/config ]; then
     echo -e "${RED}SSH configuration file not found. Creating it now...${NC}"
