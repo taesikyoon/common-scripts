@@ -24,6 +24,14 @@ normalize_input() {
     esac
 }
 
+# config 파일이 있는지 확인
+if [ ! -f ~/.ssh/config ]; then
+    echo -e "${RED}SSH configuration file not found. Creating it now...${NC}"
+    touch ~/.ssh/config
+else
+    echo -e "${GREEN}SSH configuration file exists. Proceeding...${NC}"
+fi
+
 
 # SSH 호스트 설정 이름 입력 받기
 echo -e "${GREEN}Checking SSH configuration...${NC}"

@@ -23,6 +23,14 @@ normalize_input() {
     esac
 }
 
+
+# config 파일이 있는지 확인
+if [ ! -f ~/.ssh/config ]; then
+    echo -e "${RED}SSH configuration file not found. Creating it now...${NC}"
+    touch ~/.ssh/config
+fi
+
+
 echo -e "${GREEN}Do you need to copy data from inside the Docker container to the host? (yes/no): ${NC}"
 read copy_data
 
