@@ -27,6 +27,13 @@ if ! grep -q "^AuthenticationMethods publickey,password" $SSHD_CONFIG; then
     echo "AuthenticationMethods publickey,password" | sudo tee -a $SSHD_CONFIG
 fi
 
+# developer 계정만 key 인증만 허용
+if ! grep -q "^Match User developer" $SSHD_CONFIG; then
+    echo "Match User developer" | sudo tee -a $SSHD_CONFIG
+    echo "    AuthenticationMethods publickey" | sudo tee -a $SSHD_CONFIG
+    echo "    PasswordAuthentication no" | sudo tee -a $SSHD_CONFIG
+fi
+
 sudo systemctl restart sshd
 
 # 새 사용자 계정 생성: developer
@@ -127,5 +134,6 @@ start_docker
 verify_installation
 
 sudo usermod -aG docker developer
+cat /home/developer/.ssh/${KEY_NAME}
 
 echo "설정이 완료되었습니다."
