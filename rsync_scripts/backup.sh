@@ -29,6 +29,8 @@ normalize_input() {
 if [ ! -f ~/.ssh/config ]; then
     echo -e "${RED}SSH configuration file not found. Creating it now...${NC}"
     touch ~/.ssh/config
+    chmod 600 ~/.ssh/config
+
 else
     echo -e "${GREEN}SSH configuration file exists. Proceeding...${NC}"
 fi

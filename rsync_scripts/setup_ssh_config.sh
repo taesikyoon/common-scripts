@@ -31,6 +31,13 @@ read target_user
 echo -e "${GREEN}Enter target IP or domain name: ${NC}"
 read target_host
 
+# .ssh/config 파일이 없으면 생성
+if [ ! -f ~/.ssh/config ]; then
+    echo "SSH configuration file not found. Creating it now..."
+    touch ~/.ssh/config
+    chmod 600 ~/.ssh/config  # config 파일에 대한 적절한 권한 설정
+fi
+
 ssh-copy-id -i ~/.ssh/${key_filename}.pub -p ${ssh_port} ${target_user}@${target_host}
 
 # .ssh/config 파일에 SSH 정보 등록
