@@ -11,6 +11,20 @@ BLUE='\033[0;34m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
+normalize_input() {
+    case "$1" in
+        [Yy] | [Yy][Ee][Ss])
+            echo "yes"
+            ;;
+        [Nn] | [Nn][Oo])
+            echo "no"
+            ;;
+        *)
+            echo "no"
+            ;;
+    esac
+}
+
 # RSA Key 파일 이름, 메모, 호스트 명칭, 포트 번호 입력 받기
 echo -e "${GREEN}Enter the RSA key filename (without extension): ${NC}"
 read key_filename
@@ -53,6 +67,7 @@ read -r response
 
 # 기본값을 yes로 설정
 response=${response:-yes}
+response=$(normalize_input "$response")
 
 if [[ "$response" == "yes" ]]; then
     echo "${GREEN}Great! Proceeding with the next steps....${NC}"
