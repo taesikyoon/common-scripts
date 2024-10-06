@@ -90,11 +90,9 @@ echo -e "${GREEN}Enter the source path on the host: ${NC}"
 read source_path
 echo -e "${GREEN}Enter the destination path on the remote server: ${NC}"
 read destination_path
-echo -e "${GREEN}Enter the SSH configuration name (from .ssh/config): ${NC}"
-read ssh_config_name
 
 # Perform rsync
-rsync -avz ${source_path} ${ssh_config_name}:${destination_path}
+rsync -avz ${source_path} ${host_name}:${destination_path}
 
 
 # PEM 키 전송 여부 확인
@@ -104,7 +102,7 @@ transfer_pem=$(normalize_input "$transfer_pem")
 
 if [[ $transfer_pem == "yes" ]]; then
     # 세 번째 스크립트 호출
-    ./transfer_pem_key.sh $ssh_config_name
+    ./transfer_pem_key.sh $host_name
 else
     echo "Files have been transferred. Exiting script."
 fi
