@@ -7,6 +7,8 @@ set -e
 
 # 색상 코드 정의
 GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 # RSA Key 파일 이름, 메모, 호스트 명칭, 포트 번호 입력 받기
@@ -38,7 +40,26 @@ if [ ! -f ~/.ssh/config ]; then
     chmod 600 ~/.ssh/config  # config 파일에 대한 적절한 권한 설정
 fi
 
-ssh-copy-id -i ~/.ssh/${key_filename}.pub -p ${ssh_port} ${target_user}@${target_host}
+# 공개 키 파일 출력
+echo -e "${BLUE}Please copy the following content and paste it into the target instance's ~/.ssh/authorized_keys file:${NC}"
+cat ~/.ssh/${key_filename}
+
+echo -e "${BLUE}After copying the key to the target instance, press Enter to continue...${NC}"
+read -p ""
+
+# 복사가 완료되었는지 확인
+echo -e "${BLUE}Have you successfully copied the key? (default: yes)${NC} [yes/no]: "
+read -r response
+
+# 기본값을 yes로 설정
+response=${response:-yes}
+
+if [[ "$response" == "yes" ]]; then
+    echo "${GREEN}Great! Proceeding with the next steps....${NC}"
+else
+    echo -e "${RED}You have responded that the process was not completed correctly. Please be aware that the next steps may not function as expected.${NC}"
+    echo -e "${RED}Please copy the key to ~/.ssh/authorized_keys on the target instance before proceeding.${NC}"
+fi
 
 # .ssh/config 파일에 SSH 정보 등록
 echo "Configuring SSH details in .ssh/config..."
