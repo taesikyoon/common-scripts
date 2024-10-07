@@ -70,7 +70,7 @@ response=${response:-yes}
 response=$(normalize_input "$response")
 
 if [[ "$response" == "yes" ]]; then
-    echo "${GREEN}Great! Proceeding with the next steps....${NC}"
+    echo -e "${GREEN}Great! Proceeding with the next steps...${NC}"
 else
     echo -e "${RED}You have responded that the process was not completed correctly. Please be aware that the next steps may not function as expected.${NC}"
     echo -e "${RED}Please copy the key to ~/.ssh/authorized_keys on the target instance before proceeding.${NC}"
