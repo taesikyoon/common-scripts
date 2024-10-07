@@ -16,7 +16,7 @@ sudo usermod -g developer $username
 sudo mkdir -p /home/"$username"/.ssh
 
 # PEM 키 파일 이름: $hostname_$username_rsa
-key_filename="${hostname}_${username}_rsa"
+key_filename="${HOSTNAME}_${username}_rsa"
 
 # SSH 키 생성
 sudo ssh-keygen -t rsa -b 4096 -f /home/"$username"/.ssh/"$key_filename" -N ""
