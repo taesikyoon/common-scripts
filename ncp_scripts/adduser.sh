@@ -18,8 +18,10 @@ sudo mkdir -p /home/"$username"/.ssh
 # PEM 키 파일 이름: $hostname_$username_rsa
 key_filename="${HOSTNAME}_${username}_rsa"
 
+read -s -p "Enter Key Comment or Description : " comment
+
 # SSH 키 생성
-sudo ssh-keygen -t rsa -b 4096 -f /home/"$username"/.ssh/"$key_filename" -N ""
+sudo ssh-keygen -t rsa -b 4096 -C "${comment}" -f /home/"$username"/.ssh/"$key_filename" -N ""
 sudo cat /home/"$username"/.ssh/"$key_filename".pub | sudo tee -a /home/"$username"/.ssh/authorized_keys
 
 # SSH 디렉토리 및 파일 권한 설정
