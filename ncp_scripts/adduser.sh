@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+HOSTNAME=$(hostnamectl --static)
+
 read -p "Enter username: " username
 read -s -p "Enter password: " password
 
@@ -35,3 +37,4 @@ cat /home/"$username"/.ssh/"$key_filename"
 
 # Delete
 # sudo userdel -r "username"
+# sudo groupdel "username"
