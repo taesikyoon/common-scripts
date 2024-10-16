@@ -12,6 +12,9 @@ echo "$username:$password" | sudo chpasswd
 
 # 기본 그룹을 'developer'로 변경
 sudo usermod -g developer $username
+# Docker 그룹에 사용자 추가
+sudo usermod -aG docker "$username"
+
 # SSH 디렉토리 설정
 sudo mkdir -p /home/"$username"/.ssh
 
