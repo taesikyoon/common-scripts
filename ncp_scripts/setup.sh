@@ -41,8 +41,10 @@ sudo systemctl restart sshd
 sudo adduser developer --disabled-password --gecos ""
 echo "developer:$password" | sudo chpasswd
 echo "developer ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/init-developer
-sudo chmod 2770 /home/developer  # 그룹 쓰기 권한 및 setgid 설정 (developer 그룹에 속한 사용자가 읽기/쓰기/실행 가능)
-sudo chmod g+s /home/developer    # setgid 비트 설정으로 파일/폴더 생성 시 그룹 상속
+sudo chmod 700 /home/developer
+sudo mkdir -p /home/shared_directory
+sudo chown developer:developer /home/shared_directory
+sudo chmod 2770 /home/shared_directory  # 그룹 쓰기 권한 및 setgid 설정
 
 # SSH 키 생성 및 권한 설정
 sudo mkdir -p /home/developer/.ssh
